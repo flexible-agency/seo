@@ -42,10 +42,10 @@ class SeoData extends \craft\gql\base\ObjectType
                 'description' => [
                     'type' => Type::string(),
                 ],
-                'keywords' => Type::listOf(new ObjectType([
-                    'name' => 'Ether_SEOKeyword',
-                    'fields' => ['keyword' => Type::string(), 'rating' => Type::string()]
-                ])),
+//                'keywords' => Type::listOf(new ObjectType([
+//                    'name' => 'Ether_SEOKeyword',
+//                    'fields' => ['keyword' => Type::string(), 'rating' => Type::string()]
+//                ])),
                 'social' => SeoSocialNetworks::getType(),
                 'advanced' => SeoAdvanced::getType(),
             ]

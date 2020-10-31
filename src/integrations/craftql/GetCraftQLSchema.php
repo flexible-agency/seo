@@ -56,11 +56,7 @@ class GetCraftQLSchema
 	private function _resolve ($field)
 	{
 		return function ($root) use ($field) {
-            try {
-                return html_entity_decode((string)$root->$field);
-            } catch (Exception $exception) {
-                return null;
-            }
+            return html_entity_decode((string)$root->$field);
 		};
 	}
 
