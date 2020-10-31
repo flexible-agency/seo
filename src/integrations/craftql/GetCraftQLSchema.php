@@ -2,6 +2,7 @@
 
 namespace ether\seo\integrations\craftql;
 
+use Exception;
 use markhuot\CraftQL\Events\GetFieldSchema;
 use markhuot\CraftQL\Types\VolumeInterface;
 
@@ -25,6 +26,11 @@ class GetCraftQLSchema
 			$this->_resolve('description')
 		);
 
+		// Keyword
+		$keywordObject = $event->schema->createObjectType('SeoKeyword');
+		$keywordObject->addStringField('keyword');
+		$keywordObject->addStringField('rating');
+
 		// Social Fields
 		$socialFieldObject = $event->schema->createObjectType('SeoDataSocialField');
 		$socialFieldObject->addField('twitter')->type($socialObject);
@@ -38,7 +44,7 @@ class GetCraftQLSchema
 		$fieldObject->addStringField('description')->resolve(
 			$this->_resolve('description')
 		);
-
+		$fieldObject->addField('keywords')->type($keywordObject)->lists();
 		$fieldObject->addField('social')->type($socialFieldObject);
 
 		$event->schema->addField($event->sender)->type($fieldObject);
@@ -50,7 +56,11 @@ class GetCraftQLSchema
 	private function _resolve ($field)
 	{
 		return function ($root) use ($field) {
-			return html_entity_decode((string) $root->$field);
+            try {
+                return html_entity_decode((string)$root->$field);
+            } catch (Exception $exception) {
+                return null;
+            }
 		};
 	}
 
