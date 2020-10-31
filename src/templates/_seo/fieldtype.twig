@@ -137,6 +137,7 @@
 				</label>
 			</div>
 
+			{% if not hasPreview %}<div style="display: none;">{% endif %}
 			{# Focus Keywords #}
 			<div class="seo--label">
 				<div>
@@ -218,6 +219,7 @@
 				</div>
 				{% if not hasPreview %}
 				{# End .seo--preview-dependent #}
+			</div>
 			</div>
 			{% endif %}
 		</div>

@@ -25,11 +25,6 @@ class GetCraftQLSchema
 			$this->_resolve('description')
 		);
 
-		// Keyword
-		$keywordObject = $event->schema->createObjectType('SeoKeyword');
-		$keywordObject->addStringField('keyword');
-		$keywordObject->addStringField('rating');
-
 		// Social Fields
 		$socialFieldObject = $event->schema->createObjectType('SeoDataSocialField');
 		$socialFieldObject->addField('twitter')->type($socialObject);
@@ -43,7 +38,7 @@ class GetCraftQLSchema
 		$fieldObject->addStringField('description')->resolve(
 			$this->_resolve('description')
 		);
-		//$fieldObject->addField('keywords')->type($keywordObject)->lists();
+
 		$fieldObject->addField('social')->type($socialFieldObject);
 
 		$event->schema->addField($event->sender)->type($fieldObject);
