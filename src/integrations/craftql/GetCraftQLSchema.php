@@ -43,7 +43,7 @@ class GetCraftQLSchema
 		$fieldObject->addStringField('description')->resolve(
 			$this->_resolve('description')
 		);
-		$fieldObject->addField('keywords')->type($keywordObject)->lists();
+		//$fieldObject->addField('keywords')->type($keywordObject)->lists();
 		$fieldObject->addField('social')->type($socialFieldObject);
 
 		$event->schema->addField($event->sender)->type($fieldObject);
